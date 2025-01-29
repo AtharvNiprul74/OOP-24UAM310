@@ -12,6 +12,7 @@ int dep_amt(int *b)
     ofstream file("records.txt",ios::app);
     file<<st<<endl;
     file.close();
+    cout<<amount<<"rs "<<"deposited successfully.\n"<<endl;
     return 1;
 }
 int withdraw_amt(int *b,int amount)
@@ -27,24 +28,23 @@ int withdraw_amt(int *b,int amount)
     }
     return 0;
 }
-int readfromfile()
-{
-    ifstream file("records.txt");
-    vector<string> records;
-    string line;
-    while (getline(file, line)) 
-    {
-        records.push_back(line);
-    }
-    file.close();
 
-    int count = records.size();
-    cout << "\nLast 10 Transactions:\n";
-    for (int i = max(0, count - 10); i < count; ++i) 
-    {
-        cout << records[i] << endl;
+
+void readfromfile()
+{
+    string lines[10];
+    int count = 0;
+    string line;
+    ifstream file("records.txt");
+    while (getline(file, line)) {
+        lines[count % 10] = line;
+        count++;
     }
-    return 0;
+    int start = count > 10 ? count % 10 : 0;
+    int total = count > 10 ? 10 : count;
+    for (int i = 0; i < total; i++) {
+        cout << lines[(start + i) % 10] << endl;
+    }
 }
 int main()
 {
@@ -67,10 +67,7 @@ int main()
         switch(ch)
         {
             case 1:
-                if(dep_amt(&balance))
-                {
-                    cout<<balance<<"rs "<<"deposited successfully.\n"<<endl;
-                }
+            dep_amt(&balance);
             break;
 
             case 2:
