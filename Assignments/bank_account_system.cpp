@@ -116,14 +116,18 @@ int main()
     cin>>withdraw_amt;
     b2.withdraw(withdraw_amt);
 
-    // Using accessor and mutator method.
+    // Using accessor method.
     cout<<"Holder:"<<b2.getAccountHolder()<<endl;
     cout<<"Account Number:"<<b2.getAccountNumber()<<endl;
     cout<<"Type:"<<b2.getAccountType()<<endl;
     cout<<"Balance:"<<b2.getBalance()<<" Rs."<<endl;
     cout<<"\n";
 
-    b2.setAccountType("Current");
+    // Implementation of mutator method.
+    string type;
+    cout<<"Enter Account Type:";
+    cin>>type;
+    b2.setAccountType(type);
     cout<<"\n";
     b2.displayAccountDetails();
     cout<<"\n";
@@ -146,6 +150,5 @@ int main()
     // creating new object with user inputs.
     BankAccount b3(holder_Name,acc_Number,acc_Type,acc_Balance);
     b3.displayAccountDetails();
-
     return 0;
 }
